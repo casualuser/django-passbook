@@ -38,8 +38,7 @@ def registrations(request, device_library_id, pass_type_id):
         response_data = {'lastUpdated': last_updated.strftime(
             FORMAT), 'serialNumbers': serial_numbers}
         return HttpResponse(
-            json.dumps(response_data),
-            mimetype="application/json"
+            json.dumps(response_data)
         )
     else:
         return HttpResponse(status=204)
