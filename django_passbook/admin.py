@@ -1,16 +1,24 @@
 from django.contrib import admin
 from django_passbook.models import Pass, Registration, Log
 from django_passbook import settings
-from apns import APNs, Payload
+from apns_python import Alert, APS, Payload, Headers, Client
 
 
 def push_update(modeladmin, request, queryset):
     for r in queryset.all():
         # FIXME: use different certificates for different stores
-        apns = APNs(use_sandbox=False,
-                    cert_file=settings.PASSBOOK_CERT,
-                    key_file=settings.PASSBOOK_CERT_KEY)
-        apns.gateway_server.send_notification(r.push_token, Payload())
+
+        headers = Headers(
+            custom_fields={"Content-Type": "application/json; charset=utf-8"})
+
+        client = Client(
+            push_mode='prd',
+            secure=True,
+            cert_location=settings.PASSBOOK_CERT,
+            cert_password='12345')
+
+        result = client.send(r.push_token, headers, Payload())
+
 
 push_update.short_description = "Send a push notification to update Pass"
 
