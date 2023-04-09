@@ -18,7 +18,7 @@ def push_update(modeladmin, request, queryset):
             cert_location=(settings.PASSBOOK_CERT, settings.PASSBOOK_CERT_KEY),
             cert_password=settings.PASSBOOK_CERT_PASS)
 
-        result = client.send(r.push_token, headers, Payload())
+        result = client.send(r.push_token, headers, {})
 
 
 push_update.short_description = "Send a push notification to update Pass"
