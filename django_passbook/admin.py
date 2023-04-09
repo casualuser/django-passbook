@@ -14,8 +14,9 @@ def push_update(modeladmin, request, queryset):
         client = Client(
             push_mode='prd',
             secure=True,
-            cert_location=settings.PASSBOOK_CERT,
-            cert_password='12345')
+            cert_chain_location=settings.PASSBOOK_CHAIN_CERT,
+            cert_location=(settings.PASSBOOK_CERT, settings.PASSBOOK_CERT_KEY),
+            cert_password=settings.PASSBOOK_CERT_PASS)
 
         result = client.send(r.push_token, headers, Payload())
 
