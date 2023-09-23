@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import re_path as url
 from django_passbook.views import register_pass, latest_version, registrations, log
 
 urlpatterns = [
