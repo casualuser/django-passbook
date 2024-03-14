@@ -4,7 +4,7 @@ version = __import__('django_passbook').__version__
 
 setup(
     name='django-passbook',
-    version='1.0.1',
+    version=version,
     author='Aleksei Tcelishchev',
     author_email='casualuser@gmail.com',
     packages=['django_passbook', 'django_passbook.migrations'],
